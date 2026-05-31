@@ -1,0 +1,21 @@
+{
+  "name": "backend-nodejs-express-api-rest",
+  "version": "1.0.0",
+  "description": "Practice repository for Platzi's \"Backend with Node.js: REST API with Express.js\". Includes routing, CRUD operations, services, middlewares, error handling, data validation, and deployment experiments to services like Heroku and Vercel.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlcarrascof/backend-nodejs-express-api-rest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jlcarrascof/backend-nodejs-express-api-rest/issues"
+  },
+  "homepage": "https://github.com/jlcarrascof/backend-nodejs-express-api-rest#readme"
+}
