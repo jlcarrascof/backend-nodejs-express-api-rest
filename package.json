@@ -4,7 +4,9 @@
   "description": "Practice repository for Platzi's \"Backend with Node.js: REST API with Express.js\". Includes routing, CRUD operations, services, middlewares, error handling, data validation, and deployment experiments to services like Heroku and Vercel.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:js": "node src/js/index.js",
+    "dev:ts": "ts-node-dev --respawn --transpile-only src/ts/index.ts"
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/jlcarrascof/backend-nodejs-express-api-rest/issues"
   },
-  "homepage": "https://github.com/jlcarrascof/backend-nodejs-express-api-rest#readme"
+  "homepage": "https://github.com/jlcarrascof/backend-nodejs-express-api-rest#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^6.0.3"
+  }
 }
