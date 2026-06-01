@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:js": "node src/js/index.js",
-    "dev:ts": "ts-node-dev --respawn --transpile-only src/ts/index.ts"
+    "dev:js": "nodemon src/js/index.js",
+    "dev:ts": "ts-node-dev --respawn --transpile-only src/ts/index.ts",
+    "start:js": "node src/js/index.js",
+    "start:ts": "ts-node-dev --transpile-only src/ts/index.ts"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,11 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.1",
+    "eslint": "^10.4.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3",
     "ts-node-dev": "^2.0.0",
     "typescript": "^6.0.3"
   }
