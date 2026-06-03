@@ -11,10 +11,33 @@ app.get('/new-route', (req, res) => {
 })
 
 app.get('/products', (req, res) => {
-  res.json({
-    name: 'Product 1',
-    price: 1000
-  })
+  res.json([
+    {
+      id: 1,
+      name: 'Product 1',
+      price: 1000
+    },
+    {
+      id: 2,
+      name: 'Product 2',
+      price: 2000
+    },
+    {
+      id: 3,
+      name: 'Product 3',
+      price: 3000
+    },
+    {
+      id: 4,
+      name: 'Product 4',
+      price: 4000
+    },
+    {
+      id: 5,
+      name: 'Product 5',
+      price: 5000
+    }
+  ])
 })
 
 app.listen(port, () => {
