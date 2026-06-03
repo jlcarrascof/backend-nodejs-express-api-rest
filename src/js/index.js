@@ -61,6 +61,21 @@ app.get('/categories/:categoryId/products/:productId', (req, res) => {
   });
 });
 
+// Query params
+
+app.get('/users', (req, res) => {
+  const { limit, offset } = req.query;
+
+  if (limit && offset) {
+    res.json({
+      limit,
+      offset,
+    })
+  } else {
+    res.send(`There aren't parameters`);
+  }
+})
+
 app.listen(port, () => {
   console.log('App Node with JavaScript running at port ' + port);
 });
