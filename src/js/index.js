@@ -13,34 +13,18 @@ app.get('/new-route', (req, res) => {
 })
 
 app.get('/products', (req, res) => {
-  res.json([
-    {
-      id: 1,
-      name: 'Product 1',
-      price: 1000
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      price: 2000
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      price: 3000
-    },
-    {
-      id: 4,
-      name: 'Product 4',
-      price: 4000
-    },
-    {
-      id: 5,
-      name: 'Product 5',
-      price: 5000
-    }
-  ])
-})
+
+  const products = [];
+
+  for (let index = 0; index < 100; index++) {
+    products.push({
+      name: faker.commerce.productName(),
+      price: parseInt(faker.commerce.price(), 10),
+      image: faker.image.url(),
+    });
+  }
+  res.json(products);
+});
 
 app.get('/products/:id', (req, res) => {
   const { id } = req.params;
