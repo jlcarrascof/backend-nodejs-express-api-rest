@@ -27,6 +27,10 @@ app.get('/products', (req, res) => {
   res.json(products);
 });
 
+app.get('/products/filter', (req, res) => {
+  res.send(`I'm a filter`);
+});
+
 app.get('/products/:id', (req, res) => {
   const { id } = req.params;
 
@@ -37,7 +41,7 @@ app.get('/products/:id', (req, res) => {
       price: 2000,
     }
   )
-})
+});
 
 app.get('/categories/:categoryId/products/:productId', (req, res) => {
   const { categoryId, productId } = req.params;
