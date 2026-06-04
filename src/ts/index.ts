@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import { faker } from '@faker-js/faker';
 
 const app = express();
 const port = 3000;
@@ -12,13 +13,22 @@ app.get('/new-route', (req: Request, res: Response) => {
 });
 
 app.get('/products', (req: Request, res: Response) => {
-  res.json([
-    { id: 1, name: 'Product 1', price: 1000 },
-    { id: 2, name: 'Product 2', price: 2000 },
-    { id: 3, name: 'Product 3', price: 3000 },
-    { id: 4, name: 'Product 4', price: 4000 },
-    { id: 5, name: 'Product 5', price: 5000 }
-  ]);
+  const products = [];
+  const { size } = req.query;
+  const limit = size ? parseInt(size as string, 10) : 10;
+  
+  for (let index = 0; index < limit; index++) {
+    products.push({
+      name: faker.commerce.productName(),
+      price: parseInt(faker.commerce.price(), 10),
+      image: faker.image.url(),
+    });
+  }
+  res.json(products);
+});
+
+app.get('/products/filter', (req: Request, res: Response) => {
+  res.send(`I'm a filter`);
 });
 
 app.get('/products/:id', (req: Request, res: Response) => {
@@ -36,6 +46,18 @@ app.get('/categories/:categoryId/products/:productId', (req: Request, res: Respo
     categoryId,
     productId,
   });
+});
+
+app.get('/users', (req: Request, res: Response) => {
+  const { limit, offset } = req.query;
+  if (limit && offset) {
+    res.json({
+      limit,
+      offset,
+    });
+  } else {
+    res.send(`There aren't parameters`);
+  }
 });
 
 app.listen(port, () => {
