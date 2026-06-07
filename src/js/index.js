@@ -1,6 +1,10 @@
 const express = require('express');
+const routerApi = require('./routes');
+
 const app = express();
 const port = 3000;
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('My Express Server using JavaScript');
@@ -10,12 +14,7 @@ app.get('/new-route', (req, res) => {
   res.send('This is a new route - using JavaScript');
 })
 
-app.get('/products', (req, res) => {
-  res.json({
-    name: 'Product 1',
-    price: 1000
-  })
-})
+routerApi(app);
 
 app.listen(port, () => {
   console.log('App Node with JavaScript running at port ' + port);
