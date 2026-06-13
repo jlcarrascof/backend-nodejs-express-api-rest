@@ -1,9 +1,29 @@
+import { faker } from '@faker-js/faker';
+
 class ProductsService {
-  constructor() {}
+  private products: any[];
+
+  constructor() {
+    this.products = [];
+    this.generate();
+  }
+
+  generate() {
+    const limit = 100;
+    for (let index = 0; index < limit; index++) {
+      this.products.push({
+        name: faker.commerce.productName(),
+        price: parseInt(faker.commerce.price(), 10),
+        image: faker.image.url(),
+      });
+    }
+  }
 
   create() {}
 
-  find() {}
+  find() {
+    return this.products;
+  }
 
   findOne() {}
 
