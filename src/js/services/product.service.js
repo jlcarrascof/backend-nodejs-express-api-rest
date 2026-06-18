@@ -27,8 +27,8 @@ class ProductsService {
     return this.products;
   }
 
-  findOne() {
-
+  findOne(id) {
+    return this.products.find(item => item.id === id);
   }
 
   update() {

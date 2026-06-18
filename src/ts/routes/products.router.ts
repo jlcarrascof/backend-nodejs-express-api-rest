@@ -16,7 +16,7 @@ router.get('/filter', (req: Request, res: Response) => {
 });
 
 router.get('/:id', (req: Request, res: Response) => {
-  const { id } = req.params;
+  const id = req.params.id as string;
   const product = service.findOne(id);
   res.json(product);
 });
