@@ -1,9 +1,11 @@
 import express, { Request, Response } from 'express';
+import ProductsService from './../services/product.service';
 
 const router = express.Router();
+const service = new ProductsService();
 
 router.get('/', (req: Request, res: Response) => {
-  const products: any[] = [];
+  const products = service.find();
   const { size } = req.query;
   
   res.json(products);
