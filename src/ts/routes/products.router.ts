@@ -17,17 +17,8 @@ router.get('/filter', (req: Request, res: Response) => {
 
 router.get('/:id', (req: Request, res: Response) => {
   const { id } = req.params;
-  if (id === '999') {
-    res.status(404).json({
-      message: 'Not Found',
-    });
-  } else {
-    res.status(200).json({
-      id,
-      name: 'Product X',
-      price: 2000,
-    });
-  }
+  const product = service.findOne(id);
+  res.json(product);
 });
 
 router.post('/', (req: Request, res: Response) => {
