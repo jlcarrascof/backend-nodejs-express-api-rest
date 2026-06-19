@@ -20,7 +20,14 @@ class ProductsService {
     }
   }
 
-  create() {}
+  create(data: any) {
+    const newProduct = {
+      id: faker.string.uuid(),
+      ...data,
+    };
+    this.products.push(newProduct);
+    return newProduct;
+  }
 
   find() {
     return this.products;
