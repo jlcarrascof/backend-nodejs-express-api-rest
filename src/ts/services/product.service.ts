@@ -20,7 +20,7 @@ class ProductsService {
     }
   }
 
-  create(data: any) {
+  async create(data: any) {
     const newProduct = {
       id: faker.string.uuid(),
       ...data,
@@ -29,15 +29,15 @@ class ProductsService {
     return newProduct;
   }
 
-  find() {
+  async find() {
     return this.products;
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
     return this.products.find(item => item.id === id);
   }
 
-  update(id: string, changes: any) {
+  async update(id: string, changes: any) {
     const index = this.products.findIndex(item => item.id === id);
     if (index === -1) {
       throw new Error('Product not found');
@@ -50,7 +50,7 @@ class ProductsService {
     return this.products[index];
   }
 
-  delete(id: string) {
+  async delete(id: string) {
     const index = this.products.findIndex(item => item.id === id);
     if (index === -1) {
       throw new Error('Product not found');
