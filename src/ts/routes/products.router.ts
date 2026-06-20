@@ -7,7 +7,7 @@ const service = new ProductsService();
 router.get('/', (req: Request, res: Response) => {
   const products = service.find();
   const { size } = req.query;
-  
+
   res.json(products);
 });
 
@@ -28,14 +28,14 @@ router.post('/', (req: Request, res: Response) => {
 });
 
 router.patch('/:id', (req: Request, res: Response) => {
-  const { id } = req.params;
+  const id = req.params.id as string;
   const body = req.body;
   const product = service.update(id, body);
   res.json(product);
 });
 
 router.delete('/:id', (req: Request, res: Response) => {
-  const { id } = req.params;
+  const id = req.params.id as string;
   res.json({
     message: 'deleted',
     id,
