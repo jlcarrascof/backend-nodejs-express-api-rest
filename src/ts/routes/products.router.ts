@@ -28,10 +28,16 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 router.patch('/:id', async (req: Request, res: Response) => {
-  const id = req.params.id as string;
-  const body = req.body;
-  const product = await service.update(id, body);
-  res.json(product);
+  try {
+    const id = req.params.id as string;
+    const body = req.body;
+    const product = await service.update(id, body);
+    res.json(product);
+  } catch (error: any) {
+    res.status(404).json({
+      message: error.message,
+    });
+  }
 });
 
 router.delete('/:id', async (req: Request, res: Response) => {
