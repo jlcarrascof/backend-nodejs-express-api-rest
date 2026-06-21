@@ -1,20 +1,13 @@
 import express, { Request, Response } from 'express';
-import { faker } from '@faker-js/faker';
+import ProductsService from './../services/product.service';
 
 const router = express.Router();
+const service = new ProductsService();
 
-router.get('/', (req: Request, res: Response) => {
-  const products = [];
+router.get('/', async (req: Request, res: Response) => {
+  const products = await service.find();
   const { size } = req.query;
-  const limit = size ? parseInt(size as string, 10) : 10;
 
-  for (let index = 0; index < limit; index++) {
-    products.push({
-      name: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(), 10),
-      image: faker.image.url(),
-    });
-  }
   res.json(products);
 });
 
@@ -22,45 +15,35 @@ router.get('/filter', (req: Request, res: Response) => {
   res.send(`I'm a filter`);
 });
 
-router.get('/:id', (req: Request, res: Response) => {
-  const { id } = req.params;
-  if (id === '999') {
+router.get('/:id', async (req: Request, res: Response) => {
+  const id = req.params.id as string;
+  const product = await service.findOne(id);
+  res.json(product);
+});
+
+router.post('/', async (req: Request, res: Response) => {
+  const body = req.body;
+  const newProduct = await service.create(body);
+  res.status(201).json(newProduct);
+});
+
+router.patch('/:id', async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id as string;
+    const body = req.body;
+    const product = await service.update(id, body);
+    res.json(product);
+  } catch (error: any) {
     res.status(404).json({
-      message: 'Not Found',
-    });
-  } else {
-    res.status(200).json({
-      id,
-      name: 'Product X',
-      price: 2000,
+      message: error.message,
     });
   }
 });
 
-router.post('/', (req: Request, res: Response) => {
-  const body = req.body;
-  res.status(201).json({
-    message: 'created',
-    data: body,
-  });
-});
-
-router.patch('/:id', (req: Request, res: Response) => {
-  const { id } = req.params;
-  const body = req.body;
-  res.json({
-    message: 'updated',
-    data: body,
-    id,
-  });
-});
-
-router.delete('/:id', (req: Request, res: Response) => {
-  const { id } = req.params;
-  res.json({
-    message: 'deleted',
-    id,
-  });
+router.delete('/:id', async (req: Request, res: Response) => {
+  const id = req.params.id as string;
+  const rpta = await service.delete(id);
+  res.json(rpta);
 });
 
 export default router;
