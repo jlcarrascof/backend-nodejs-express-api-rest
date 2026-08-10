@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import ProductsService from './../services/product.service';
 
 const router = express.Router();
@@ -15,10 +15,14 @@ router.get('/filter', (req: Request, res: Response) => {
   res.send(`I'm a filter`);
 });
 
-router.get('/:id', async (req: Request, res: Response) => {
-  const id = req.params.id as string;
-  const product = await service.findOne(id);
-  res.json(product);
+router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id as string;
+    const product = await service.findOne(id);
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post('/', async (req: Request, res: Response) => {
