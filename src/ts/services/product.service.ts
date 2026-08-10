@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import boom from '@hapi/boom';
 
 class ProductsService {
   private products: any[];
@@ -38,14 +39,17 @@ class ProductsService {
   }
 
   async findOne(id: string) {
-    const name = (this as any).getTotal();
-    return this.products.find(item => item.id === id);
+    const product = this.products.find(item => item.id === id);
+    if (!product) {
+      throw boom.notFound('Product Not Found!');
+    }
+    return product;
   }
 
   async update(id: string, changes: any) {
     const index = this.products.findIndex(item => item.id === id);
     if (index === -1) {
-      throw new Error('Product not found');
+      throw boom.notFound('Product Not Found!');
     }
     const product = this.products[index];
     this.products[index] = {
@@ -58,7 +62,7 @@ class ProductsService {
   async delete(id: string) {
     const index = this.products.findIndex(item => item.id === id);
     if (index === -1) {
-      throw new Error('Product not found');
+      throw boom.notFound('Product Not Found!');
     }
     this.products.splice(index, 1);
     return { id };
