@@ -13,3 +13,13 @@ export function errorHandler(err: Error, req: Request, res: Response, next: Next
     stack: err.stack,
   });
 }
+
+export function boomErrorHandler(err: any, req: Request, res: Response, next: NextFunction) {
+  console.log('boomErrorHandler');
+  if (err.isBoom) {
+    const { output } = err;
+    res.status(output.statusCode).json(output.payload);
+  } else {
+    next(err);
+  }
+}

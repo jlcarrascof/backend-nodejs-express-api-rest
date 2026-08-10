@@ -31,16 +31,14 @@ router.post('/', async (req: Request, res: Response) => {
   res.status(201).json(newProduct);
 });
 
-router.patch('/:id', async (req: Request, res: Response) => {
+router.patch('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id as string;
     const body = req.body;
     const product = await service.update(id, body);
     res.json(product);
-  } catch (error: any) {
-    res.status(404).json({
-      message: error.message,
-    });
+  } catch (error) {
+    next(error);
   }
 });
 
