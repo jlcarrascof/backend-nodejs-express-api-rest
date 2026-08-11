@@ -24,7 +24,8 @@
   "homepage": "https://github.com/jlcarrascof/backend-nodejs-express-api-rest#readme",
   "dependencies": {
     "@hapi/boom": "^10.0.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "joi": "^18.2.3"
   },
   "devDependencies": {
     "@faker-js/faker": "^10.4.0",
