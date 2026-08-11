@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import ProductsService from './../services/product.service';
-
+import { validatorHandler } from './../middlewares/validator.handler';
+import { createProductSchema, updateProductSchema, getProductSchema } from './../schemas/product.schema';
 const router = express.Router();
 const service = new ProductsService();
 
@@ -15,7 +16,7 @@ router.get('/filter', (req: Request, res: Response) => {
   res.send(`I'm a filter`);
 });
 
-router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/:id', validatorHandler(getProductSchema, 'params'), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id as string;
     const product = await service.findOne(id);
