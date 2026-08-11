@@ -3,10 +3,10 @@ const boom = require('@hapi/boom');
 function validatorHandler(schema, property) {
   return (req, res, next) => {
     const data = req[property];
-    // Se añade abortEarly: false para que Joi envíe todos los errores a la vez
+    // Adding abortEarly: false so Joi returns all errors at once
     const { error } = schema.validate(data, { abortEarly: false });
     if (error) {
-      // Importante usar return o un bloque else para que no llame a next() dos veces
+      // Important to use return or an else block to avoid calling next() twice
       next(boom.badRequest(error));
     } else {
       next();
