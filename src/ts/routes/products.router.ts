@@ -26,22 +26,26 @@ router.get('/:id', validatorHandler(getProductSchema, 'params'), async (req: Req
   }
 });
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', validatorHandler(createProductSchema, 'body'), async (req: Request, res: Response) => {
   const body = req.body;
   const newProduct = await service.create(body);
   res.status(201).json(newProduct);
 });
 
-router.patch('/:id', async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const id = req.params.id as string;
-    const body = req.body;
-    const product = await service.update(id, body);
-    res.json(product);
-  } catch (error) {
-    next(error);
+router.patch('/:id',
+  validatorHandler(getProductSchema, 'params'),
+  validatorHandler(updateProductSchema, 'body'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id = req.params.id as string;
+      const body = req.body;
+      const product = await service.update(id, body);
+      res.json(product);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 router.delete('/:id', async (req: Request, res: Response) => {
   const id = req.params.id as string;
